@@ -16,10 +16,10 @@ Create new migration file with `li3 create migration` command:
 
 This will create migration in current library `resources/migration` dir:
 
-	```php
+```php
 
 	//app/resources/migration/20130506002905_Users.php
-	
+
 	namespace app\resources\migration;
 
 	class Users extends \li3_migrations\models\Migration {
@@ -36,7 +36,7 @@ This will create migration in current library `resources/migration` dir:
 
 	}
 
-	```
+```
 
 You can provide this arguments to command:
 
