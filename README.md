@@ -16,6 +16,7 @@ Create new migration file with `li3 create migration` command:
 
 This will create migration in current library `resources/migration` dir:
 
+	```php
 	//'app/resources/migration/20130506002905_Users.php'
 
 	<?php
@@ -37,13 +38,14 @@ This will create migration in current library `resources/migration` dir:
 	}
 
 	?>
+	```
 
 You can provide this arguments to command:
 
-`table` - custom table name (this is value of `source` property): `--table=site_users`
-`env` - desired environment: `--env=production`
-`connection` - desired connection name: `--connection=test`
-`library` - specify library to use: `--library=li3_usermanager`
+* `table` - custom table name (this is value of `source` property): `--table=site_users`
+* `env` - desired environment: `--env=production`
+* `connection` - desired connection name: `--connection=test`
+* `library` - specify library to use: `--library=li3_usermanager`
 
 Run migrations with `li3 migrate` command:
 
