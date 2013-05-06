@@ -4,21 +4,21 @@
 
 ## Dependencies
 
-`li3_fixtures` https://github.com/UnionOfRAD/li3_fixtures [Installation instructions](https://github.com/UnionOfRAD/li3_fixtures#readme)
+[li3_fixtures](https://github.com/UnionOfRAD/li3_fixtures) - [Installation instructions](https://github.com/UnionOfRAD/li3_fixtures#readme)
 
-`lithium` from `master` branch (after v0.11) with integrated `li3_sqltools` in
+[lithium](https://github.com/UnionOfRAD/lithium) from `master` branch (after v0.11) with integrated `li3_sqltools`
 
 ## Usage
+
+#### `create migration`
 
 Create new migration file with `li3 create migration` command:
 
 	li3 create migration Users
+	//app/resources/migration/20130506002905_Users.php
 
-This will create migration in current library `resources/migration` dir:
 
 ```php
-
-	//app/resources/migration/20130506002905_Users.php
 
 	namespace app\resources\migration;
 
@@ -38,12 +38,12 @@ This will create migration in current library `resources/migration` dir:
 
 ```
 
-You can provide this arguments to command:
+You can provide arguments to command:
 
-* `table` - custom table name (this is value of `source` property): `--table=site_users`
-* `env` - desired environment: `--env=production`
-* `connection` - desired connection name: `--connection=test`
+* `source` - custom table name (this is value of `source` property): `--source=site_users`
 * `library` - specify library to use: `--library=li3_usermanager`
+
+#### `migrate`
 
 Run migrations with `li3 migrate` command:
 

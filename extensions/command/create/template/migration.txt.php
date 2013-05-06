@@ -6,7 +6,7 @@ class {:class} extends \li3_migrations\models\Migration {
 
 	protected $_records = array();
 
-	protected $_source = '{:table}';
+	protected $_source = '{:source}';
 
 	public function up() {}
 

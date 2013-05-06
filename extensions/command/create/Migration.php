@@ -35,8 +35,8 @@ class Migration extends \lithium\console\command\Create {
 	 * @param $request
 	 * @return string
 	 */
-	protected function _table($request) {
-		if ($request->table) return Inflector::tableize($request->table);
+	protected function _source($request) {
+		if ($request->source) return $request->source;
 		return Inflector::tableize($request->action);
 	}
 
