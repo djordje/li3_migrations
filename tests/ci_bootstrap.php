@@ -1,6 +1,6 @@
 <?php
 
-define('LITHIUM_APP_PATH', dirname(dirname(__DIR__)));
+define('LITHIUM_APP_PATH', dirname(__DIR__));
 define('LITHIUM_LIBRARY_PATH', dirname(LITHIUM_APP_PATH) . '/libraries');
 
 if (!include LITHIUM_LIBRARY_PATH . '/lithium/core/Libraries.php') {

@@ -10,7 +10,7 @@ before_script:
   - mkdir app/config
   - mkdir app/libraries
   - mkdir libraries
-  - mv li3_migrations/tests/ci_bootstrap.php app/config/bootstrap.php
+  - cp li3_migrations/tests/ci_bootstrap.php app/config/bootstrap.php
   - mv li3_migrations app/libraries/li3_migrations
   - git clone --branch=dev --depth=100 --quiet git://github.com/UnionOfRAD/lithium.git libraries/lithium
   - git clone --branch=master --depth=100 --quiet git://github.com/UnionOfRAD/li3_fixtures.git libraries/li3_fixtures
