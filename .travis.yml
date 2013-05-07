@@ -6,11 +6,15 @@ php:
 
 before_script:
   - cd ..
-  - mv li3_migrations/tests/ci app
+  - mkdir app
+  - mkdir app/config
+  - mkdir app/libraries
   - mkdir libraries
-  - mv li3_migrations libraries/li3_migrations
+  - mv li3_migrations/tests/ci_bootstrap.php app/config/bootstrap.php
+  - mv li3_migrations app/libraries/li3_migrations
   - git clone --branch=dev --depth=100 --quiet git://github.com/UnionOfRAD/lithium.git libraries/lithium
   - git clone --branch=master --depth=100 --quiet git://github.com/UnionOfRAD/li3_fixtures.git libraries/li3_fixtures
   - mysql -e 'create database li3migrations_test;'
+  - cd app/libraries/li3_migrations
 
-script: libraries/lithium/console/li3 test --filters=Profiler tests/cases
+script: ../../../libraries/lithium/console/li3 test --filters=Profiler test/cases
