@@ -14,9 +14,8 @@ use lithium\core\Libraries;
 use lithium\data\Connections;
 
 Libraries::add('lithium');
-Libraries::add('app', array('default' => true));
+Libraries::add('li3_migrations', array('default' => true));
 Libraries::add('li3_fixtures');
-Libraries::add('li3_migrations');
 
 Connections::add('default', array(
 	'type' => 'database',
