@@ -1,0 +1,16 @@
+language: php
+
+php:
+  - 5.3
+  - 5.4
+
+before_script:
+  - cd ..
+  - mv li3_migrations/tests/ci app
+  - mkdir libraries
+  - mv li3_migrations libraries/li3_migrations
+  - git clone --branch=dev --depth=100 --quiet git://github.com/UnionOfRAD/lithium.git libraries/lithium
+  - git clone --branch=master --depth=100 --quiet git://github.com/UnionOfRAD/li3_fixtures.git libraries/li3_fixtures
+  - mysql -e 'create database li3migrations_test;'
+
+script: libraries/lithium/console/li3 test --filters=Profiler tests/cases
