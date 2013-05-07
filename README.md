@@ -1,4 +1,4 @@
-# Database migrations for Lithium framework
+# Database migrations for Lithium framework [![Build Status](https://travis-ci.org/djordje/li3_migrations.png?branch=master)](https://travis-ci.org/djordje/li3_migrations)
 
 ---
 
