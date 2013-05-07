@@ -60,8 +60,12 @@ class Migrate extends Command {
 		foreach($this->_filterMigrations($timestamp) as $migration) {
 			if (include_once $migration['file']) {
 				$m = new $migration['class']($this->_options);
-				$m->up();
-				$this->_setState($migration['timestamp']);
+				if ($m->up()) {
+					$this->_setState($migration['timestamp']);
+					$this->out(
+						"Success `Migration::up` timestamp: `{$migration['timestamp']}`"
+					);
+				}
 			}
 		}
 	}
@@ -75,12 +79,16 @@ class Migrate extends Command {
 		foreach(array_reverse($this->_filterMigrations($timestamp)) as $migration) {
 			if (include_once $migration['file']) {
 				$m = new $migration['class']($this->_options);
-				$m->down();
-				$state = $this->_prepareTimestamp(1);
-				if (isset($this->_migrations[$migration['index'] - 1])) {
-					$state = $this->_migrations[$migration['index'] - 1]['timestamp'];
+				if ($m->down()) {
+					$state = $this->_prepareTimestamp(1);
+					if (isset($this->_migrations[$migration['index'] - 1])) {
+						$state = $this->_migrations[$migration['index'] - 1]['timestamp'];
+					}
+					$this->_setState($state);
+					$this->out(
+						"Success `Migration::down` timestamp: `{$migration['timestamp']}`"
+					);
 				}
-				$this->_setState($state);
 			}
 		}
 	}

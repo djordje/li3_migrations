@@ -3,6 +3,7 @@
 namespace li3_migrations\tests\cases\extensions\command;
 
 use li3_migrations\extensions\command\Migrate;
+use li3_migrations\tests\mocks\extensions\command\MockMigrate;
 use li3_migrations\tests\mocks\models\Migration as MockTable;
 use lithium\console\Request;
 use lithium\core\Libraries;
@@ -229,6 +230,19 @@ class MigrateTest extends Unit {
 		$this->assertEqual($expected, $result);
 	}
 
+	public function testCustomConnection() {
+		$this->request->params += array(
+			'command' => 'migrate', 'action' => 'up', 'connection' => 'test_connection'
+		);
+		$migrate = new MockMigrate(array(
+			'request' => $this->request, 'classes' => $this->classes
+		));
+
+		$expected = 'test_connection';
+		$result = $migrate->getOptions('connection');
+		$this->assertEqual($expected, $result);
+	}
+
 	public function testMigrateUpDown() {
 		$this->request->params += array(
 			'command' => 'migrate', 'action' => 'up'
@@ -242,6 +256,12 @@ class MigrateTest extends Unit {
 		$expected = array();
 		$result = MockTable::all()->to('array');
 		$this->assertEqual($expected, $result);
+
+		$expected = "Success `Migration::up` timestamp: `20130506221317`\n";
+		$result = $migrate->response->output;
+		$this->assertEqual($expected, $result);
+
+		$migrate->response->output = '';
 
 		$migrate->up(20130506221429);
 		$expected = array(
@@ -264,6 +284,12 @@ class MigrateTest extends Unit {
 		$result = MockTable::all()->to('array');
 		$this->assertEqual($expected, $result);
 
+		$expected = "Success `Migration::up` timestamp: `20130506221429`\n";
+		$result = $migrate->response->output;
+		$this->assertEqual($expected, $result);
+
+		$migrate->response->output = '';
+
 		$migrate->request->params['action'] = 'down';
 
 		$migrate->down(20130506221429);
@@ -271,9 +297,19 @@ class MigrateTest extends Unit {
 		$result = MockTable::all()->to('array');
 		$this->assertEqual($expected, $result);
 
+		$expected = "Success `Migration::down` timestamp: `20130506221429`\n";
+		$result = $migrate->response->output;
+		$this->assertEqual($expected, $result);
+
+		$migrate->response->output = '';
+
 		$migrate->down(20130506221317);
-//		$this->expectException(true);
-//		MockTable::all()->to('array');
+
+		$expected = "Success `Migration::down` timestamp: `20130506221317`\n";
+		$result = $migrate->response->output;
+		$this->assertEqual($expected, $result);
+
+		$migrate->response->output = '';
 
 		$migrate->request->params['action'] = 'up';
 		$migrate->up();
@@ -297,10 +333,22 @@ class MigrateTest extends Unit {
 		$result = MockTable::all()->to('array');
 		$this->assertEqual($expected, $result);
 
+		$expected  = "Success `Migration::up` timestamp: `20130506221317`\n";
+		$expected .= "Success `Migration::up` timestamp: `20130506221429`\n";
+		$result = $migrate->response->output;
+		$this->assertEqual($expected, $result);
+
+		$migrate->response->output = '';
+
 		$migrate->request->params['action'] = 'down';
 		$migrate->down(1);
-		$this->expectException(true);
-		MockTable::all()->to('array');
+		$expected  = "Success `Migration::down` timestamp: `20130506221429`\n";
+		$expected .= "Success `Migration::down` timestamp: `20130506221317`\n";
+
+		$result = $migrate->response->output;
+		$this->assertEqual($expected, $result);
+
+		$migrate->response->output = '';
 	}
 
 }

@@ -19,11 +19,11 @@ class ImportInitialPosts extends \li3_migrations\models\Migration {
 	protected $_source = 'migration_test';
 
 	public function up() {
-		$this->save();
+		return $this->save();
 	}
 
 	public function down() {
-		$this->truncate();
+		return $this->truncate();
 	}
 
 }

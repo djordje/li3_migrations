@@ -15,11 +15,11 @@ class CreatePostsTable extends \li3_migrations\models\Migration {
 	protected $_source = 'migration_test';
 
 	public function up() {
-		$this->create();
+		return $this->create();
 	}
 
 	public function down() {
-		$this->drop();
+		return $this->drop();
 	}
 
 }
