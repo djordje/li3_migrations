@@ -1,0 +1,20 @@
+{
+    "name": "djordje/li3_migrations",
+    "type": "lithium-library",
+    "description": "Database migrations for Lithium PHP framework",
+    "keywords": ["php", "db", "mysql", "migrate", "lithium", "li3"],
+    "homepage": "https://github.com/djordje/li3_migrations",
+    "license": "BSD-3-Clause",
+    "minimum-stability": "dev",
+    "authors": [
+        {
+            "name": "Djordje Kovacevic",
+            "homepage": "http://djordjekovacevic.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3",
+        "composer/installers": "dev-master",
+        "unionofrad/li3_fixtures": "dev-master"
+    }
+}
