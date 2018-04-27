@@ -66,10 +66,10 @@ class Migrate extends Command {
 						"Success `Migration::up` timestamp: `{$migration['timestamp']}`"
 					);
 				} else {
-                    $this->out(
+					$this->out(
 						"Failed `Migration::up` timestamp: `{$migration['timestamp']}`"
 					);
-                }
+				}
 			}
 		}
 	}
@@ -96,7 +96,7 @@ class Migrate extends Command {
 					$this->out(
 						"Failed `Migration::down` timestamp: `{$migration['timestamp']}`"
 					);                    
-                }
+				}
 			}
 		}
 	}
