@@ -2,9 +2,11 @@ namespace {:namespace};
 
 class {:class} extends \li3_migrations\models\Migration {
 
-	protected $_fields = array();
+	protected $_fields = [];
 
-	protected $_records = array();
+	protected $_records = [];
+    
+	protected $_meta = [];
 
 	protected $_source = '{:source}';
 

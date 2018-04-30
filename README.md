@@ -24,9 +24,11 @@ Create new migration file with `li3 create migration` command:
 
 	class Users extends \li3_migrations\models\Migration {
 
-		protected $_fields = array();
+		protected $_fields = [];
 
-		protected $_records = array();
+		protected $_records = [];
+    
+		protected $_meta = [];
 
 		protected $_source = 'users';
 
@@ -36,6 +38,74 @@ Create new migration file with `li3 create migration` command:
 
 	}
 
+```
+
+Each field can have a type, length, if default or nullable
+
+```php
+
+	protected $_fields = [
+		'id' => ['type' => 'id'],
+		'name' => ['type' => 'string', 'default' => 'foo', 'length' => 128, 'null' => false],
+		'bar_id' => ['type' => 'integer']    
+	];
+  
+```
+
+Meta can be used to set constraints, table engine, charset
+
+```php
+
+	protected $_meta = [
+		'constraints' => [
+			[
+				'type' => 'foreign_key',
+				'column' => 'id',
+				'toColumn' => 'id',
+				'to' => 'other_table'
+			]
+		],
+		'table' => ['charset' => 'utf8', 'engine' => 'InnoDB']
+	];
+  
+```
+
+Examples
+
+Create new table up and down
+
+```php
+
+	public function up() {
+		return $this->create()
+	}
+    
+	public function down() {
+		return $this->drop();
+	}
+  
+```
+
+Create new table and add records
+
+```php
+
+	protected $_records = array(
+		['name' => 'foo', 'type' => 1],
+		['name' => 'bar', 'type' => 1]
+	);
+
+	public function up() {
+		if (!$this->create())
+			return false;
+    
+		return $this->save();
+	}
+
+	public function down() {
+		return $this->drop();
+	}
+  
 ```
 
 You can provide arguments to command:

@@ -3,7 +3,7 @@
 namespace li3_migrations\extensions\command\create;
 
 use lithium\util\Inflector;
-use lithium\util\String;
+use lithium\util\Text;
 
 class Migration extends \lithium\console\command\Create {
 
@@ -56,7 +56,7 @@ class Migration extends \lithium\console\command\Create {
 			return false;
 		}
 		$contents = $this->_template();
-		$result = String::insert($contents, $params);
+		$result = Text::insert($contents, $params);
 		$namespace = str_replace($this->_library['prefix'], '\\', $params['namespace']);
 		$date = date('YmdHis');
 		$path = str_replace('\\', '/', "{$namespace}\\{$date}_{$params['class']}");
